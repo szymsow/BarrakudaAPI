@@ -7,6 +7,7 @@ namespace WebAPI.Controllers
 {
     [Route("api/product")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -18,6 +19,7 @@ namespace WebAPI.Controllers
 
         [SwaggerOperation(Summary = "Retrieves all products")]
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> GetAll()
         {
             var products = await _productService.GetAllProducts();
@@ -27,6 +29,7 @@ namespace WebAPI.Controllers
 
         [SwaggerOperation(Summary = "Retrieves a specific product by unique id")]
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Get([FromRoute]int id)
         {
             var products = await _productService.GetProductById(id);

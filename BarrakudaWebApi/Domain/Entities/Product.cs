@@ -13,7 +13,7 @@
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
-        public int CreatedById { get; set; }
+        public int? CreatedById { get; set; }
         public virtual User CreatedBy { get; set; }
     }
 }

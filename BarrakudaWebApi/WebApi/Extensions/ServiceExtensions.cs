@@ -1,4 +1,10 @@
-﻿namespace WebApi.Extensions
+﻿using Application.Authorization;
+using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using WebApi.Middleware;
+using WebApi.Services;
+
+namespace WebApi.Extensions
 {
     public static class ServiceExtensions
     {
@@ -14,6 +20,15 @@
         {
             services.AddControllers()
                 .AddFluentValidation();
+
+            return services;
+        }
+        public static IServiceCollection AddBarrakudaServices(this IServiceCollection services)
+        {
+            services.AddScoped<ErrorHandlingMiddleware>();
+            services.AddScoped<IUserContextService, UserContextService>();
+            services.AddScoped<IAuthorizationHandler, ResourceOperationRequirementHandler>();
+            services.AddHttpContextAccessor();
 
             return services;
         }

@@ -1,4 +1,6 @@
-﻿using Application.Exceptions;
+﻿using Application.Authorization;
+using Application.Exceptions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
 namespace Application.Services
@@ -8,24 +10,45 @@ namespace Application.Services
         private readonly IProductRepository _productRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<ProductService> _logger;
+        private readonly IUserContextService _userContextService;
+        private readonly IAuthorizationService _authorizationService;
+
         public ProductService(IProductRepository productRepository,
             IMapper mapper,
-            ILogger<ProductService> logger)
+            ILogger<ProductService> logger,
+            IUserContextService userContextService,
+            IAuthorizationService authorizationService)
         {
             _productRepository = productRepository;
             _mapper = mapper;
             _logger = logger;
+            _userContextService = userContextService;
+            _authorizationService = authorizationService;
         }
         public async Task CreateProduct(CreateProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
 
-            product.CreatedById = 2;
+            product.CreatedById = _userContextService.GetUserId;
             await _productRepository.CreateProduct(product);
         }
 
         public async Task DeleteProduct(int productId)
         {
+            var product = await _productRepository.GetProductById(productId);
+            if (product is null)
+            {
+                throw new NotFoundException("product not found");
+            }
+
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, product,
+                new ResourceOperationRequirement(ResourceOperation.Delete)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("not authorized");
+            }
+
             _logger.LogInformation($"Comment with id: {productId} DELETE action invoked");
             await _productRepository.DeleteProduct(productId);
         }
@@ -50,11 +73,19 @@ namespace Application.Services
         }
 
         public async Task UpdateProduct(UpdateProductDto updateProductDto, int productId)
-        {
+        {          
             var product = await _productRepository.GetProductById(productId);
             if (product is null)
             {
                 throw new NotFoundException("product not found");
+            }
+
+            var authorizationResult = _authorizationService.AuthorizeAsync(_userContextService.User, product,
+                new ResourceOperationRequirement(ResourceOperation.Update)).Result;
+
+            if (!authorizationResult.Succeeded)
+            {
+                throw new ForbidException("not authorized");
             }
 
             product.Name = updateProductDto.Name;

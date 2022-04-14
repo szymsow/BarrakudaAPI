@@ -14,12 +14,7 @@ namespace WebApi.Extensions
         {
             application.UseMiddleware<ErrorHandlingMiddleware>();
         }
-        public static IServiceCollection AddBarrakudaServices(this IServiceCollection services)
-        {
-            services.AddScoped<ErrorHandlingMiddleware>();
 
-            return services;
-        }
         public static async Task Seed(this WebApplication application)
         {
             var scope = application.Services.CreateScope();
