@@ -9,3 +9,4 @@ global using Microsoft.AspNetCore.Identity;
 global using Application.Services;
 global using Application.Validators.Account;
 global using System.Reflection;
+global using Application.Models.Product;

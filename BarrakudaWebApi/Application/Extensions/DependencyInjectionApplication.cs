@@ -1,4 +1,6 @@
-﻿namespace Application.Extensions
+﻿using Application.Validators.Product;
+
+namespace Application.Extensions
 {
     public static class DependencyInjectionApplication
     {
@@ -9,9 +11,11 @@
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IProductService, ProductService>();
 
             services.AddScoped<IValidator<RegisterDto>, RegisterDtoValidator>();
             services.AddScoped<IValidator<LoginDto>, LoginDtoValidator>();
+            services.AddScoped<IValidator<CreateProductDto>, CreateProductDtoValidator>();
 
             return services;
         }

@@ -35,7 +35,7 @@ namespace WebApi.Middleware
                     default:
                         response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         _logger.LogError(exception, exception.Message);
-                        await context.Response.WriteAsync("Something went wrong");
+                        await context.Response.WriteAsync(exception.ToString());
                         return;
                 }
 

@@ -5,10 +5,10 @@
         public LoginDtoValidator()
         {
             RuleFor(x => x.Email)
-                .NotEmpty();
+                .NotEmpty().WithMessage("Email can not be empty");
 
             RuleFor(x => x.Password)
-                .NotEmpty();
+                .NotEmpty().WithMessage("Password can not be empty");
         }
     }
 }
