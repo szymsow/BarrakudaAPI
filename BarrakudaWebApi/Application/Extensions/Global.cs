@@ -1,1 +1,11 @@
 ﻿global using Microsoft.Extensions.DependencyInjection;
+global using Application.Models.Account;
+global using FluentValidation;
+global using Application.Interfaces;
+global using Domain.Interfaces;
+global using AutoMapper;
+global using Domain.Entities;
+global using Microsoft.AspNetCore.Identity;
+global using Application.Services;
+global using Application.Validators.Account;
+global using System.Reflection;
