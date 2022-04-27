@@ -5,6 +5,7 @@
 .vs
 /.vs
 .vs/
+.vs/**
 /.vs/BarrakudaWebApi/v17
 /BarrakudaWebApi/.vs/BarrakudaWebApi/v17
 /BarrakudaWebApi/.vs
