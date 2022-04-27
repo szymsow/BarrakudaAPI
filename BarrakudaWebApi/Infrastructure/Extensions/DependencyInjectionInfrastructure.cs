@@ -6,6 +6,7 @@
         {
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IBasketRepository, BasketRepository>();
 
             services.AddScoped<BarrakudaWebApiSeeder>();
             return services;

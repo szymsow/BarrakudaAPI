@@ -22,6 +22,10 @@ app.AddMiddleware();
 app.UseAuthentication();
 app.UseHttpsRedirection();
 app.UseRouting();
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader().AllowAnyHeader().AllowCredentials().WithOrigins("http://localhost:3000");
+});
 app.UseAuthorization();
 
 app.MapControllers();

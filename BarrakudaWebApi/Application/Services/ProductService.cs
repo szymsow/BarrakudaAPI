@@ -1,5 +1,4 @@
 ﻿using Application.Authorization;
-using Application.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 
