@@ -6,5 +6,6 @@ namespace Domain.Interfaces
     {
         ClaimsPrincipal User { get; }
         int? GetUserId { get; }
+        string GetUserName { get; }
     }
 }

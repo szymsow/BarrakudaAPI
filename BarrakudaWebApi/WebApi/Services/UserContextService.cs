@@ -16,5 +16,9 @@ namespace WebApi.Services
 
         public int? GetUserId => 
             User is null ? null : (int?)int.Parse(User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+        public string GetUserName =>
+            User is null ? null : User.FindFirst(c => c.Type == ClaimTypes.Name).Value;
+
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace WebApi.Controllers
+﻿using Domain.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+
+namespace WebApi.Controllers
 {
     [Route("/api/account")]
     [ApiController]
@@ -8,7 +11,7 @@
 
         public AccountController(IAccountService userService)
         {
-            _accountService = userService;
+            _accountService = userService;       
         }
 
         [SwaggerOperation(Summary = "Register a new user")]
