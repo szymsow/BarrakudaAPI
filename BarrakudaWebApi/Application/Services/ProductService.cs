@@ -52,9 +52,9 @@ namespace Application.Services
             await _productRepository.DeleteProduct(productId);
         }
 
-        public async Task<IEnumerable<ProductDto>> GetAllProducts()
+        public async Task<IEnumerable<ProductDto>> GetAllProducts(string query)
         {
-            var products = await _productRepository.GetAllProducts();
+            var products = await _productRepository.GetAllProducts(query);
             var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
 
             return productsDto;

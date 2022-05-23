@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs
+/.vs/BarrakudaWebApi/v17
 /BarrakudaWebApi/.vs/BarrakudaWebApi/v17
 /BarrakudaWebApi/Application/bin/Debug/net6.0
 /BarrakudaWebApi/Application/obj

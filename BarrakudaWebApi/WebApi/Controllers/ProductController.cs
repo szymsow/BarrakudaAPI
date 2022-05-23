@@ -20,9 +20,9 @@ namespace WebAPI.Controllers
         [SwaggerOperation(Summary = "Retrieves all products")]
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll([FromQuery]string query)
         {
-            var products = await _productService.GetAllProducts();
+            var products = await _productService.GetAllProducts(query);
 
             return Ok(products);
         }

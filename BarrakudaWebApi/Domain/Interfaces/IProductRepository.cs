@@ -6,6 +6,6 @@
         Task UpdateProduct(Product product, int productId);
         Task DeleteProduct(int productId);
         Task<Product> GetProductById(int productId);
-        Task<IEnumerable<Product>> GetAllProducts();
+        Task<IEnumerable<Product>> GetAllProducts(string query);
     }
 }
