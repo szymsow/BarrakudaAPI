@@ -43,10 +43,22 @@
 
             return product;
         }
+
+        public async Task<IEnumerable<Product>> GetProductsByCategory(string category)
+        {
+            var products = await _dbContext.Products
+                .Include(x => x.Category)
+                .Include(x => x.CreatedBy)
+                .Where(x => x.Category.Name == category).ToListAsync();
+
+            return products;
+        }
+
         public async Task<IEnumerable<Product>> GetAllProducts(string query)
         {
             var products = await _dbContext.Products
                 .Include(x => x.Category)
+                .Include(x => x.CreatedBy)
                 .Where(x => query == null || (x.Name.ToLower().Contains(query.ToLower())
                                             || x.Description.ToLower()
                                                 .Contains(query.ToLower())))

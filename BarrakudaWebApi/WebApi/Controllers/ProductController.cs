@@ -37,6 +37,16 @@ namespace WebAPI.Controllers
             return Ok(products);
         }
 
+        [SwaggerOperation(Summary = "Retrieves a specific product by unique category")]
+        [HttpGet("category/{category}")]
+        [AllowAnonymous]
+        public async Task<ActionResult> GetByCategory([FromRoute] string category)
+        {
+            var products = await _productService.GetProductsByCategory(category);
+
+            return Ok(products);
+        }
+
         [SwaggerOperation(Summary = "Create a new product")]
         [HttpPost]
         public async Task<ActionResult> Create([FromBody]CreateProductDto productDto)

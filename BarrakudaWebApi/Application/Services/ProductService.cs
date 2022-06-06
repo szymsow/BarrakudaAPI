@@ -71,6 +71,20 @@ namespace Application.Services
             return productDto;
         }
 
+        public async Task<IEnumerable<ProductDto>> GetProductsByCategory(string category)
+        {
+            var products = await _productRepository.GetProductsByCategory(category);
+
+            if (!products.Any())
+            {
+                throw new NotFoundException("not found");
+            }
+            var productsDto = _mapper.Map<IEnumerable<ProductDto>>(products);
+
+            return productsDto;
+
+        }
+
         public async Task UpdateProduct(UpdateProductDto updateProductDto, int productId)
         {          
             var product = await _productRepository.GetProductById(productId);
