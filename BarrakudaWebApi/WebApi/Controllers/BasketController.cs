@@ -121,6 +121,7 @@ namespace WebApi.Controllers
                     Description = item.Product.Description,
                     Condition = item.Product.Condition,
                     Brand = item.Product.Brand,
+                    Price = item.Product.Price,
                     ProductQuantity = item.Product.Quantity,
                     Category = item.Product.Category.Name
 
